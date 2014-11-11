@@ -10,6 +10,7 @@
 
 import tank
 from tank import TankError
+from sgtkLib import tkm
 
 OPEN_FILE_ACTION, SAVE_FILE_AS_ACTION, NEW_FILE_ACTION, VERSION_UP_FILE_ACTION = range(4)
 
@@ -87,7 +88,7 @@ def prepare_new_scene(app, action, context):
     app.log_debug("Preparing the new scene via hook")
     return _do_scene_operation(app, action, context, "prepare_new")
     
-def save_file(app, action, context, path=None):
+def save_file(app, action, context, path=None, comment=None):
     """
     Use hook to save the current file
     """
@@ -97,6 +98,10 @@ def save_file(app, action, context, path=None):
     else:
         app.log_debug("Saving the current file with hook")
         _do_scene_operation(app, action, context, "save")
+    
+    # get a Wip object and set comment
+    wip = tkm.Wip(get_current_path(app, action, context))
+    wip.comment = comment
 
 def open_file(app, action, context, path, version, read_only):
     """

@@ -52,6 +52,9 @@ class SaveAs(object):
         
         # cache any fields that should be ignored when looking for work files:
         self.__version_compare_ignore_fields = self._app.get_setting("version_compare_ignore_fields", [])        
+
+        # custom mikros
+        self._variante = ''
         
     def _show_save_as_dlg(self):
         """
@@ -80,6 +83,30 @@ class SaveAs(object):
         
         # update some initial info:        
         title = "Save to Work Area" if is_publish else "Shotgun Save As"
+        
+        # variante
+        # retrieve variante from entity in Shotgun (for Models and Assets)
+
+        tk = self._app.tank
+        sg = tk.shotgun
+        entity = self._app.context.entity
+        
+        if entity['type'] in ['Asset', 'CustomEntity01']:
+            sgFilters = [
+                    ['project', 'is', self._app.context.project],
+                    ['id', 'is', entity['id']]
+                    ]
+            sgFields = ['sg_variante', 'code']
+            
+            entity = sg.find_one(entity['type'], sgFilters, sgFields)
+            
+            if not entity:
+                self._app.log_exception("Failed to get entity (%s) with fields %s" % (entity, sgFields))
+
+            self._variante = entity['sg_variante']
+        
+        # end variante
+        
         name = ""
         if name_is_used:
             if is_publish:
@@ -161,6 +188,7 @@ class SaveAs(object):
                     # get details from UI:
                     name = form.name
                     reset_version = form.reset_version
+                    comment = form.comment
                     
                     details = self.generate_new_work_file_path(current_path, is_publish, name, reset_version)
                     new_path = details.get("path")
@@ -173,7 +201,7 @@ class SaveAs(object):
                      
                     # ok, so do save-as:
                     try:
-                        self.save_as(new_path)
+                        self.save_as(new_path, comment)
                     except Exception, e:
                         QtGui.QMessageBox.critical(None, "Failed to save file!", "Failed to save file:\n\n%s" % msg)
                         self._app.log_exception("Something went wrong while saving!")
@@ -183,7 +211,7 @@ class SaveAs(object):
         finally:
             preview_updater.stop()
         
-    def save_as(self, new_path):
+    def save_as(self, new_path, comment):
         """
         Do actual save-as of the current scene as the new path - assumes all validity checking has already
         been done
@@ -207,7 +235,7 @@ class SaveAs(object):
             self._app.ensure_folder_exists(dir)
         
         # and save the current file as the new path:
-        save_file(self._app, SAVE_FILE_AS_ACTION, self._app.context, new_path)
+        save_file(self._app, SAVE_FILE_AS_ACTION, self._app.context, new_path, comment)
         
     def generate_new_work_file_path(self, current_path, current_is_publish, new_name, reset_version):
         """
@@ -257,6 +285,10 @@ class SaveAs(object):
             # clear the current name:
             if "name" in fields:
                 del fields["name"]
+
+        # update variante field
+        if self._variante:
+            fields["variante"] = self._variante
 
         # if we haven't cached the file list already, do it now:
         if not self._cached_files:

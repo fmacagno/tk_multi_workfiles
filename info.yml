@@ -137,7 +137,7 @@ configuration:
     saveas_default_name:
       type: str
       description: The default name that gets used by when saving a work file using the
-                   save-as command
+                   save-as command. If set to an empty String, the entity code will be used.
       default_value: scene
 
     saveas_prefer_version_up:

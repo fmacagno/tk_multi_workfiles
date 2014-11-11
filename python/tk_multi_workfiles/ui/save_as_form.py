@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'save_as_form.ui'
+# Form implementation generated from reading ui file './save_as_form.ui'
 #
-#      by: pyside-uic 0.2.13 running on PySide 1.1.0
+# Created: Tue Nov 11 10:38:11 2014
+#      by: pyside-uic 0.2.14 running on PySide 1.2.0
 #
 # WARNING! All changes made in this file will be lost!
 
+#from PySide import QtCore, QtGui
 from tank.platform.qt import QtCore, QtGui
 
 class Ui_SaveAsForm(object):
@@ -54,28 +56,18 @@ class Ui_SaveAsForm(object):
         self.gridLayout.setHorizontalSpacing(16)
         self.gridLayout.setVerticalSpacing(10)
         self.gridLayout.setObjectName("gridLayout")
-        self.name_layout = QtGui.QHBoxLayout()
-        self.name_layout.setContentsMargins(4, -1, -1, -1)
-        self.name_layout.setObjectName("name_layout")
-        self.name_edit = QtGui.QLineEdit(SaveAsForm)
-        self.name_edit.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.name_edit.setFrame(True)
-        self.name_edit.setObjectName("name_edit")
-        self.name_layout.addWidget(self.name_edit)
-        self.reset_version_cb = QtGui.QCheckBox(SaveAsForm)
-        self.reset_version_cb.setObjectName("reset_version_cb")
-        self.name_layout.addWidget(self.reset_version_cb)
-        self.gridLayout.addLayout(self.name_layout, 0, 1, 1, 1)
+        self.label_6 = QtGui.QLabel(SaveAsForm)
+        self.label_6.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.label_6.setMargin(4)
+        self.label_6.setIndent(0)
+        self.label_6.setObjectName("label_6")
+        self.gridLayout.addWidget(self.label_6, 3, 0, 1, 1)
         self.name_label = QtGui.QLabel(SaveAsForm)
         self.name_label.setMinimumSize(QtCore.QSize(0, 0))
         self.name_label.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.name_label.setIndent(4)
         self.name_label.setObjectName("name_label")
         self.gridLayout.addWidget(self.name_label, 0, 0, 1, 1)
-        self.filename_preview_label = QtGui.QLabel(SaveAsForm)
-        self.filename_preview_label.setIndent(4)
-        self.filename_preview_label.setObjectName("filename_preview_label")
-        self.gridLayout.addWidget(self.filename_preview_label, 1, 1, 1, 1)
         self.path_preview_edit = QtGui.QTextEdit(SaveAsForm)
         self.path_preview_edit.setEnabled(True)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
@@ -98,18 +90,34 @@ class Ui_SaveAsForm(object):
         self.path_preview_edit.setReadOnly(True)
         self.path_preview_edit.setAcceptRichText(True)
         self.path_preview_edit.setObjectName("path_preview_edit")
-        self.gridLayout.addWidget(self.path_preview_edit, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self.path_preview_edit, 3, 1, 1, 1)
+        self.name_layout = QtGui.QHBoxLayout()
+        self.name_layout.setContentsMargins(4, -1, -1, -1)
+        self.name_layout.setObjectName("name_layout")
+        self.name_edit = QtGui.QLineEdit(SaveAsForm)
+        self.name_edit.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.name_edit.setFrame(True)
+        self.name_edit.setObjectName("name_edit")
+        self.name_layout.addWidget(self.name_edit)
+        self.reset_version_cb = QtGui.QCheckBox(SaveAsForm)
+        self.reset_version_cb.setObjectName("reset_version_cb")
+        self.name_layout.addWidget(self.reset_version_cb)
+        self.gridLayout.addLayout(self.name_layout, 0, 1, 1, 1)
         self.preview_label = QtGui.QLabel(SaveAsForm)
         self.preview_label.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.preview_label.setIndent(4)
         self.preview_label.setObjectName("preview_label")
         self.gridLayout.addWidget(self.preview_label, 1, 0, 1, 1)
-        self.label_6 = QtGui.QLabel(SaveAsForm)
-        self.label_6.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
-        self.label_6.setMargin(4)
-        self.label_6.setIndent(0)
-        self.label_6.setObjectName("label_6")
-        self.gridLayout.addWidget(self.label_6, 2, 0, 1, 1)
+        self.filename_preview_label = QtGui.QLabel(SaveAsForm)
+        self.filename_preview_label.setIndent(4)
+        self.filename_preview_label.setObjectName("filename_preview_label")
+        self.gridLayout.addWidget(self.filename_preview_label, 1, 1, 1, 1)
+        self.comment_label = QtGui.QLabel(SaveAsForm)
+        self.comment_label.setObjectName("comment_label")
+        self.gridLayout.addWidget(self.comment_label, 2, 0, 1, 1)
+        self.comment_edit = QtGui.QLineEdit(SaveAsForm)
+        self.comment_edit.setObjectName("comment_edit")
+        self.gridLayout.addWidget(self.comment_edit, 2, 1, 1, 1)
         self.gridLayout.setColumnStretch(1, 1)
         self.verticalLayout_2.addLayout(self.gridLayout)
         self.verticalLayout.addLayout(self.verticalLayout_2)
@@ -145,19 +153,21 @@ class Ui_SaveAsForm(object):
     def retranslateUi(self, SaveAsForm):
         SaveAsForm.setWindowTitle(QtGui.QApplication.translate("SaveAsForm", "Form", None, QtGui.QApplication.UnicodeUTF8))
         self.header_label.setText(QtGui.QApplication.translate("SaveAsForm", "Type in a name below and Shotgun will save the current scene", None, QtGui.QApplication.UnicodeUTF8))
-        self.reset_version_cb.setText(QtGui.QApplication.translate("SaveAsForm", "Reset Version No.?", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_6.setText(QtGui.QApplication.translate("SaveAsForm", "<html><head/><body><p><span style=\" font-weight:600;\">Work Area:</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
         self.name_label.setText(QtGui.QApplication.translate("SaveAsForm", "<html><head/><body><p><span style=\" font-weight:600;\">Name:</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
-        self.filename_preview_label.setText(QtGui.QApplication.translate("SaveAsForm", "name.v001.ma", None, QtGui.QApplication.UnicodeUTF8))
         self.path_preview_edit.setHtml(QtGui.QApplication.translate("SaveAsForm", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Lucida Grande\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">/foo/bar/...</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">line 2</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">line 3</p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+"</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Lucida Grande\'; font-size:13pt;\">/foo/bar/...</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Lucida Grande\'; font-size:13pt;\">line 2</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Lucida Grande\'; font-size:13pt;\">line 3</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        self.reset_version_cb.setText(QtGui.QApplication.translate("SaveAsForm", "Reset Version No.?", None, QtGui.QApplication.UnicodeUTF8))
         self.preview_label.setText(QtGui.QApplication.translate("SaveAsForm", "<html><head/><body><p><span style=\" font-weight:600;\">Preview:</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_6.setText(QtGui.QApplication.translate("SaveAsForm", "<html><head/><body><p><span style=\" font-weight:600;\">Work Area:</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        self.filename_preview_label.setText(QtGui.QApplication.translate("SaveAsForm", "name.v001.ma", None, QtGui.QApplication.UnicodeUTF8))
+        self.comment_label.setText(QtGui.QApplication.translate("SaveAsForm", "<html><head/><body><p><span style=\" font-weight:600;\">Comment:</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        self.comment_edit.setPlaceholderText(QtGui.QApplication.translate("SaveAsForm", "Enter your comment here.", None, QtGui.QApplication.UnicodeUTF8))
         self.cancel_btn.setText(QtGui.QApplication.translate("SaveAsForm", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
         self.continue_btn.setText(QtGui.QApplication.translate("SaveAsForm", "Save", None, QtGui.QApplication.UnicodeUTF8))
 
-from . import resources_rc
+import resources_rc

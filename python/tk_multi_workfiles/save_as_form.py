@@ -96,6 +96,13 @@ class SaveAsForm(QtGui.QWidget):
         return self._get_new_name()
     
     @property
+    def comment(self):
+        """
+        Get and set the comment
+        """
+        return self._get_new_comment()
+
+    @property
     def reset_version(self):
         """
         Get and set if the version number should be reset
@@ -131,6 +138,10 @@ class SaveAsForm(QtGui.QWidget):
         name_str = self._ui.name_edit.text() or ""
         return self._safe_to_str(name_str).strip()
     
+    def _get_new_comment(self):
+        comment_str = self._ui.comment_edit.text() or ""
+        return self._safe_to_str(comment_str).strip()
+
     def _safe_to_str(self, value):
         """
         safely convert the value to a string - handles
