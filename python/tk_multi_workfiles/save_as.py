@@ -91,18 +91,20 @@ class SaveAs(object):
         sg = tk.shotgun
         entity = self._app.context.entity
         
-        if entity['type'] in ['Asset', 'CustomEntity01']:
-            sgFilters = [
-                    ['project', 'is', self._app.context.project],
-                    ['id', 'is', entity['id']]
+        # default_name might use entity code
+        sgFilters = [
+                ['project', 'is', self._app.context.project],
+                ['id', 'is', entity['id']]
                     ]
-            sgFields = ['sg_variante', 'code']
-            
-            entity = sg.find_one(entity['type'], sgFilters, sgFields)
-            
-            if not entity:
-                self._app.log_exception("Failed to get entity (%s) with fields %s" % (entity, sgFields))
+        sgFields = ['sg_variante', 'code']
 
+        entity = sg.find_one(entity['type'], sgFilters, sgFields)
+        
+        if not entity:
+            self._app.log_exception("Failed to get entity (%s) with fields %s" % (entity, sgFields))
+
+        # variante is not relevant for Shot...
+        if entity['type'] in ['Asset', 'CustomEntity01']:
             self._variante = entity['sg_variante']
         
         # end variante
@@ -117,7 +119,7 @@ class SaveAs(object):
                 default_name = self._app.get_setting("saveas_default_name")
                 if not default_name and not name_is_optional:
                     # name isn't optional so we should use something:
-                    default_name = "scene"
+                    default_name = entity['code']
 
                 # determine the initial name depending on the current path:
                 fields = {}
