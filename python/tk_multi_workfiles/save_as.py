@@ -105,7 +105,10 @@ class SaveAs(object):
 
         # variante is not relevant for Shot...
         if entity['type'] in ['Asset', 'CustomEntity01']:
-            self._variante = entity['sg_variante']
+            if entity['sg_variante']:
+                self._variante = entity['sg_variante']
+            else:
+                self._app.log_exception("Variante not set for entity %s" % (entity))
         
         # end variante
         
