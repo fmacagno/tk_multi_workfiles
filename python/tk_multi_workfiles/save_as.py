@@ -54,7 +54,7 @@ class SaveAs(object):
         self.__version_compare_ignore_fields = self._app.get_setting("version_compare_ignore_fields", [])        
 
         # custom mikros
-        self._variante = ''
+        self._variant = ''
         
     def _show_save_as_dlg(self):
         """
@@ -84,8 +84,8 @@ class SaveAs(object):
         # update some initial info:        
         title = "Save to Work Area" if is_publish else "Shotgun Save As"
         
-        # variante
-        # retrieve variante from entity in Shotgun (for Models and Assets)
+        # variant
+        # retrieve variant from entity in Shotgun (for Models and Assets)
 
         tk = self._app.tank
         sg = tk.shotgun
@@ -96,21 +96,21 @@ class SaveAs(object):
                 ['project', 'is', self._app.context.project],
                 ['id', 'is', entity['id']]
                     ]
-        sgFields = ['sg_variante', 'code']
+        sgFields = ['sg_variant', 'code']
 
         entity = sg.find_one(entity['type'], sgFilters, sgFields)
         
         if not entity:
             self._app.log_exception("Failed to get entity (%s) with fields %s" % (entity, sgFields))
 
-        # variante is not relevant for Shot...
+        # variant is not relevant for Shot...
         if entity['type'] in ['Asset', 'CustomEntity01']:
-            if entity['sg_variante']:
-                self._variante = entity['sg_variante']
+            if entity['sg_variant']:
+                self._variant = entity['sg_variant']
             else:
-                self._app.log_exception("Variante not set for entity %s" % (entity))
+                self._app.log_exception("Variant not set for entity %s" % (entity))
         
-        # end variante
+        # end variant
         
         name = ""
         if name_is_used:
@@ -291,9 +291,9 @@ class SaveAs(object):
             if "name" in fields:
                 del fields["name"]
 
-        # update variante field
-        if self._variante:
-            fields["variante"] = self._variante
+        # update variant field
+        if self._variant:
+            fields["variant"] = self._variant
 
         # if we haven't cached the file list already, do it now:
         if not self._cached_files:
