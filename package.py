@@ -1,5 +1,5 @@
 name = 'tk_multi_workfiles'
-version = '0.6.4.mikros.1'
+version = '0.6.4.mikros.1.0'
 
 requires = ['tkCoreSnapshot-0.14.77']
 
